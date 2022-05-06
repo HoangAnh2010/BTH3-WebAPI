@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BTH3ModelStoreContainer" CdmEntityContainer="BTH3Entities">
+    <EntitySetMapping Name="Cong">
+      <EntityTypeMapping TypeName="BTH3Model.Cong">
+        <MappingFragment StoreEntitySet="Cong">
+          <ScalarProperty Name="MaCT" ColumnName="MaCT" />
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="SLNgayCong" ColumnName="SLNgayCong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Congtrinh">
+      <EntityTypeMapping TypeName="BTH3Model.Congtrinh">
+        <MappingFragment StoreEntitySet="Congtrinh">
+          <ScalarProperty Name="MaCT" ColumnName="MaCT" />
+          <ScalarProperty Name="TenCT" ColumnName="TenCT" />
+          <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+          <ScalarProperty Name="NGAYCAPGP" ColumnName="NGAYCAPGP" />
+          <ScalarProperty Name="NGAYKC" ColumnName="NGAYKC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhanVien">
+      <EntityTypeMapping TypeName="BTH3Model.NhanVien">
+        <MappingFragment StoreEntitySet="NhanVien">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phongban">
+      <EntityTypeMapping TypeName="BTH3Model.Phongban">
+        <MappingFragment StoreEntitySet="Phongban">
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+          <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionName="BTH3Model.Store.f_nvtheotuoi" FunctionImportName="f_nvtheotuoi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BTH3Model.f_nvtheotuoi_Result">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoDC" FunctionImportName="F_NhanVienTheoDC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoDC_Result">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoMa" FunctionImportName="F_NhanVienTheoMa">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoMa_Result">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoTen" FunctionImportName="F_NhanVienTheoTen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoTen_Result">
+          <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="BTH3Model.Store.F_SoNhanVienTheoGT" FunctionImportName="F_SoNhanVienTheoGT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BTH3Model.F_SoNhanVienTheoGT_Result">
+          <ScalarProperty Name="C_Quantity_" ColumnName="'Quantity'" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SuaCong" FunctionName="BTH3Model.Store.SuaCong" />
+    <FunctionImportMapping FunctionImportName="SuaCT" FunctionName="BTH3Model.Store.SuaCT" />
+    <FunctionImportMapping FunctionImportName="SuaNV" FunctionName="BTH3Model.Store.SuaNV" />
+    <FunctionImportMapping FunctionImportName="SuaPB" FunctionName="BTH3Model.Store.SuaPB" />
+    <FunctionImportMapping FunctionImportName="ThemCong" FunctionName="BTH3Model.Store.ThemCong" />
+    <FunctionImportMapping FunctionImportName="ThemCongTrinh" FunctionName="BTH3Model.Store.ThemCongTrinh" />
+    <FunctionImportMapping FunctionImportName="ThemNV" FunctionName="BTH3Model.Store.ThemNV" />
+    <FunctionImportMapping FunctionImportName="ThemPB" FunctionName="BTH3Model.Store.ThemPB" />
+    <FunctionImportMapping FunctionImportName="XoaCong" FunctionName="BTH3Model.Store.XoaCong" />
+    <FunctionImportMapping FunctionImportName="XoaCT" FunctionName="BTH3Model.Store.XoaCT" />
+    <FunctionImportMapping FunctionImportName="XoaNV" FunctionName="BTH3Model.Store.XoaNV" />
+    <FunctionImportMapping FunctionImportName="XoaPB" FunctionName="BTH3Model.Store.XoaPB" />
+  </EntityContainerMapping>
+</Mapping>

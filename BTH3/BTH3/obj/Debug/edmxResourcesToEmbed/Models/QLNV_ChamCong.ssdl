@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BTH3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cong">
+    <Key>
+      <PropertyRef Name="MaCT" />
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaCT" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="SLNgayCong" Type="int" />
+  </EntityType>
+  <EntityType Name="Congtrinh">
+    <Key>
+      <PropertyRef Name="MaCT" />
+    </Key>
+    <Property Name="MaCT" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="TenCT" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DiaDiem" Type="nvarchar(max)" />
+    <Property Name="NGAYCAPGP" Type="date" />
+    <Property Name="NGAYKC" Type="date" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+    <Property Name="DiaChi" Type="nvarchar(max)" />
+    <Property Name="MaPB" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Phongban">
+    <Key>
+      <PropertyRef Name="MaPB" />
+    </Key>
+    <Property Name="MaPB" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="TenPB" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FR_nv_phongban">
+    <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phongban">
+        <PropertyRef Name="MaPB" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaPB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="f_nvtheotuoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="a" Type="int" Mode="In" />
+    <Parameter Name="b" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="varchar" MaxLength="30" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="F_NhanVienTheoDC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="varchar" MaxLength="30" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="F_NhanVienTheoMa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma" Type="varchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="varchar" MaxLength="30" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="F_NhanVienTheoTen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="varchar" MaxLength="30" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="F_SoNhanVienTheoGT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="gt" Type="nvarchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="'Quantity'" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="SuaCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+    <Parameter Name="slngaycong" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SuaCT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+    <Parameter Name="tenct" Type="nvarchar" Mode="In" />
+    <Parameter Name="diadiem" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ngaycapgp" Type="date" Mode="In" />
+    <Parameter Name="ngaykc" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SuaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+    <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="ngaysinh" Type="date" Mode="In" />
+    <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="mapb" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SuaPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mapb" Type="varchar" Mode="In" />
+    <Parameter Name="tenpb" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ThemCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+    <Parameter Name="slngaycong" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ThemCongTrinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+    <Parameter Name="tenct" Type="nvarchar" Mode="In" />
+    <Parameter Name="diadiem" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ngaycapgp" Type="date" Mode="In" />
+    <Parameter Name="ngaykc" Type="date" Mode="In" />
+  </Function>
+  <Function Name="ThemNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+    <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="ngaysinh" Type="date" Mode="In" />
+    <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+    <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="mapb" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ThemPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mapb" Type="varchar" Mode="In" />
+    <Parameter Name="tenpb" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="XoaCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="XoaCT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mact" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="XoaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="XoaPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mapb" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="BTH3ModelStoreContainer">
+    <EntitySet Name="Cong" EntityType="Self.Cong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Congtrinh" EntityType="Self.Congtrinh" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Phongban" EntityType="Self.Phongban" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FR_nv_phongban" Association="Self.FR_nv_phongban">
+      <End Role="Phongban" EntitySet="Phongban" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BTH3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cong">
+          <Key>
+            <PropertyRef Name="MaCT" />
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaCT" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="SLNgayCong" Type="int" />
+        </EntityType>
+        <EntityType Name="Congtrinh">
+          <Key>
+            <PropertyRef Name="MaCT" />
+          </Key>
+          <Property Name="MaCT" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TenCT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaDiem" Type="nvarchar(max)" />
+          <Property Name="NGAYCAPGP" Type="date" />
+          <Property Name="NGAYKC" Type="date" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Phongban">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TenPB" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FR_nv_phongban">
+          <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phongban">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="f_nvtheotuoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="a" Type="int" Mode="In" />
+          <Parameter Name="b" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+                <Property Name="NgaySinh" Type="date" />
+                <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+                <Property Name="DiaChi" Type="nvarchar(max)" />
+                <Property Name="MaPB" Type="varchar" MaxLength="30" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_NhanVienTheoDC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+                <Property Name="NgaySinh" Type="date" />
+                <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+                <Property Name="DiaChi" Type="nvarchar(max)" />
+                <Property Name="MaPB" Type="varchar" MaxLength="30" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_NhanVienTheoMa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ma" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+                <Property Name="NgaySinh" Type="date" />
+                <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+                <Property Name="DiaChi" Type="nvarchar(max)" />
+                <Property Name="MaPB" Type="varchar" MaxLength="30" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_NhanVienTheoTen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="MaNV" Type="varchar" MaxLength="30" Nullable="false" />
+                <Property Name="HoTen" Type="nvarchar" MaxLength="30" Nullable="false" />
+                <Property Name="NgaySinh" Type="date" />
+                <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
+                <Property Name="DiaChi" Type="nvarchar(max)" />
+                <Property Name="MaPB" Type="varchar" MaxLength="30" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="F_SoNhanVienTheoGT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gt" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="'Quantity'" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="SuaCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+          <Parameter Name="slngaycong" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SuaCT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+          <Parameter Name="tenct" Type="nvarchar" Mode="In" />
+          <Parameter Name="diadiem" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ngaycapgp" Type="date" Mode="In" />
+          <Parameter Name="ngaykc" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SuaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="date" Mode="In" />
+          <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="mapb" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SuaPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mapb" Type="varchar" Mode="In" />
+          <Parameter Name="tenpb" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ThemCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+          <Parameter Name="slngaycong" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThemCongTrinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+          <Parameter Name="tenct" Type="nvarchar" Mode="In" />
+          <Parameter Name="diadiem" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ngaycapgp" Type="date" Mode="In" />
+          <Parameter Name="ngaykc" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ThemNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <Parameter Name="ngaysinh" Type="date" Mode="In" />
+          <Parameter Name="gioitinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="diachi" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="mapb" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ThemPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mapb" Type="varchar" Mode="In" />
+          <Parameter Name="tenpb" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="XoaCong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="XoaCT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mact" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="XoaNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="XoaPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mapb" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BTH3ModelStoreContainer">
+          <EntitySet Name="Cong" EntityType="Self.Cong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Congtrinh" EntityType="Self.Congtrinh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phongban" EntityType="Self.Phongban" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FR_nv_phongban" Association="Self.FR_nv_phongban">
+            <End Role="Phongban" EntitySet="Phongban" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BTH3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="f_nvtheotuoi_Result">
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="F_NhanVienTheoDC_Result">
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="F_NhanVienTheoMa_Result">
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="F_NhanVienTheoTen_Result">
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="F_SoNhanVienTheoGT_Result">
+          <Property Name="C_Quantity_" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="Cong">
+          <Key>
+            <PropertyRef Name="MaCT" />
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SLNgayCong" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Congtrinh">
+          <Key>
+            <PropertyRef Name="MaCT" />
+          </Key>
+          <Property Name="MaCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NGAYCAPGP" Type="DateTime" Precision="0" />
+          <Property Name="NGAYKC" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Phongban">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenPB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FR_nv_phongban">
+          <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phongban">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BTH3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cong" EntityType="Self.Cong" />
+          <EntitySet Name="Congtrinh" EntityType="Self.Congtrinh" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" />
+          <EntitySet Name="Phongban" EntityType="Self.Phongban" />
+          <AssociationSet Name="FR_nv_phongban" Association="Self.FR_nv_phongban">
+            <End Role="Phongban" EntitySet="Phongban" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <FunctionImport Name="f_nvtheotuoi" IsComposable="true" ReturnType="Collection(BTH3Model.f_nvtheotuoi_Result)">
+            <Parameter Name="a" Mode="In" Type="Int32" />
+            <Parameter Name="b" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="F_NhanVienTheoDC" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoDC_Result)">
+            <Parameter Name="diachi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="F_NhanVienTheoMa" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoMa_Result)">
+            <Parameter Name="ma" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="F_NhanVienTheoTen" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoTen_Result)">
+            <Parameter Name="hoten" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="F_SoNhanVienTheoGT" IsComposable="true" ReturnType="Collection(BTH3Model.F_SoNhanVienTheoGT_Result)">
+            <Parameter Name="gt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SuaCong">
+            <Parameter Name="mact" Mode="In" Type="String" />
+            <Parameter Name="manv" Mode="In" Type="String" />
+            <Parameter Name="slngaycong" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SuaCT">
+            <Parameter Name="mact" Mode="In" Type="String" />
+            <Parameter Name="tenct" Mode="In" Type="String" />
+            <Parameter Name="diadiem" Mode="In" Type="String" />
+            <Parameter Name="ngaycapgp" Mode="In" Type="DateTime" />
+            <Parameter Name="ngaykc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SuaNV">
+            <Parameter Name="manv" Mode="In" Type="String" />
+            <Parameter Name="hoten" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="diachi" Mode="In" Type="String" />
+            <Parameter Name="mapb" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SuaPB">
+            <Parameter Name="mapb" Mode="In" Type="String" />
+            <Parameter Name="tenpb" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThemCong">
+            <Parameter Name="mact" Mode="In" Type="String" />
+            <Parameter Name="manv" Mode="In" Type="String" />
+            <Parameter Name="slngaycong" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThemCongTrinh">
+            <Parameter Name="mact" Mode="In" Type="String" />
+            <Parameter Name="tenct" Mode="In" Type="String" />
+            <Parameter Name="diadiem" Mode="In" Type="String" />
+            <Parameter Name="ngaycapgp" Mode="In" Type="DateTime" />
+            <Parameter Name="ngaykc" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ThemNV">
+            <Parameter Name="manv" Mode="In" Type="String" />
+            <Parameter Name="hoten" Mode="In" Type="String" />
+            <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+            <Parameter Name="gioitinh" Mode="In" Type="String" />
+            <Parameter Name="diachi" Mode="In" Type="String" />
+            <Parameter Name="mapb" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThemPB">
+            <Parameter Name="mapb" Mode="In" Type="String" />
+            <Parameter Name="tenpb" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="XoaCong">
+            <Parameter Name="mact" Mode="In" Type="String" />
+            <Parameter Name="manv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="XoaCT">
+            <Parameter Name="mact" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="XoaNV">
+            <Parameter Name="manv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="XoaPB">
+            <Parameter Name="mapb" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BTH3ModelStoreContainer" CdmEntityContainer="BTH3Entities">
+          <EntitySetMapping Name="Cong">
+            <EntityTypeMapping TypeName="BTH3Model.Cong">
+              <MappingFragment StoreEntitySet="Cong">
+                <ScalarProperty Name="MaCT" ColumnName="MaCT" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="SLNgayCong" ColumnName="SLNgayCong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Congtrinh">
+            <EntityTypeMapping TypeName="BTH3Model.Congtrinh">
+              <MappingFragment StoreEntitySet="Congtrinh">
+                <ScalarProperty Name="MaCT" ColumnName="MaCT" />
+                <ScalarProperty Name="TenCT" ColumnName="TenCT" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+                <ScalarProperty Name="NGAYCAPGP" ColumnName="NGAYCAPGP" />
+                <ScalarProperty Name="NGAYKC" ColumnName="NGAYKC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanVien">
+            <EntityTypeMapping TypeName="BTH3Model.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phongban">
+            <EntityTypeMapping TypeName="BTH3Model.Phongban">
+              <MappingFragment StoreEntitySet="Phongban">
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="BTH3Model.Store.f_nvtheotuoi" FunctionImportName="f_nvtheotuoi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BTH3Model.f_nvtheotuoi_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoDC" FunctionImportName="F_NhanVienTheoDC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoDC_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoMa" FunctionImportName="F_NhanVienTheoMa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoMa_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BTH3Model.Store.F_NhanVienTheoTen" FunctionImportName="F_NhanVienTheoTen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BTH3Model.F_NhanVienTheoTen_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="BTH3Model.Store.F_SoNhanVienTheoGT" FunctionImportName="F_SoNhanVienTheoGT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BTH3Model.F_SoNhanVienTheoGT_Result">
+                <ScalarProperty Name="C_Quantity_" ColumnName="'Quantity'" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SuaCong" FunctionName="BTH3Model.Store.SuaCong" />
+          <FunctionImportMapping FunctionImportName="SuaCT" FunctionName="BTH3Model.Store.SuaCT" />
+          <FunctionImportMapping FunctionImportName="SuaNV" FunctionName="BTH3Model.Store.SuaNV" />
+          <FunctionImportMapping FunctionImportName="SuaPB" FunctionName="BTH3Model.Store.SuaPB" />
+          <FunctionImportMapping FunctionImportName="ThemCong" FunctionName="BTH3Model.Store.ThemCong" />
+          <FunctionImportMapping FunctionImportName="ThemCongTrinh" FunctionName="BTH3Model.Store.ThemCongTrinh" />
+          <FunctionImportMapping FunctionImportName="ThemNV" FunctionName="BTH3Model.Store.ThemNV" />
+          <FunctionImportMapping FunctionImportName="ThemPB" FunctionName="BTH3Model.Store.ThemPB" />
+          <FunctionImportMapping FunctionImportName="XoaCong" FunctionName="BTH3Model.Store.XoaCong" />
+          <FunctionImportMapping FunctionImportName="XoaCT" FunctionName="BTH3Model.Store.XoaCT" />
+          <FunctionImportMapping FunctionImportName="XoaNV" FunctionName="BTH3Model.Store.XoaNV" />
+          <FunctionImportMapping FunctionImportName="XoaPB" FunctionName="BTH3Model.Store.XoaPB" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

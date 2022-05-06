@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BTH3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="f_nvtheotuoi_Result">
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" />
+    <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </ComplexType>
+  <ComplexType Name="F_NhanVienTheoDC_Result">
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" />
+    <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </ComplexType>
+  <ComplexType Name="F_NhanVienTheoMa_Result">
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" />
+    <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </ComplexType>
+  <ComplexType Name="F_NhanVienTheoTen_Result">
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" />
+    <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </ComplexType>
+  <ComplexType Name="F_SoNhanVienTheoGT_Result">
+    <Property Name="C_Quantity_" Type="Int32" />
+  </ComplexType>
+  <EntityType Name="Cong">
+    <Key>
+      <PropertyRef Name="MaCT" />
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SLNgayCong" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Congtrinh">
+    <Key>
+      <PropertyRef Name="MaCT" />
+    </Key>
+    <Property Name="MaCT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DiaDiem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NGAYCAPGP" Type="DateTime" Precision="0" />
+    <Property Name="NGAYKC" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNV" />
+    </Key>
+    <Property Name="MaNV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Phongban">
+    <Key>
+      <PropertyRef Name="MaPB" />
+    </Key>
+    <Property Name="MaPB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenPB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FR_nv_phongban">
+    <End Role="Phongban" Type="Self.Phongban" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Phongban">
+        <PropertyRef Name="MaPB" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaPB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BTH3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cong" EntityType="Self.Cong" />
+    <EntitySet Name="Congtrinh" EntityType="Self.Congtrinh" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" />
+    <EntitySet Name="Phongban" EntityType="Self.Phongban" />
+    <AssociationSet Name="FR_nv_phongban" Association="Self.FR_nv_phongban">
+      <End Role="Phongban" EntitySet="Phongban" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <FunctionImport Name="f_nvtheotuoi" IsComposable="true" ReturnType="Collection(BTH3Model.f_nvtheotuoi_Result)">
+      <Parameter Name="a" Mode="In" Type="Int32" />
+      <Parameter Name="b" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="F_NhanVienTheoDC" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoDC_Result)">
+      <Parameter Name="diachi" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="F_NhanVienTheoMa" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoMa_Result)">
+      <Parameter Name="ma" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="F_NhanVienTheoTen" IsComposable="true" ReturnType="Collection(BTH3Model.F_NhanVienTheoTen_Result)">
+      <Parameter Name="hoten" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="F_SoNhanVienTheoGT" IsComposable="true" ReturnType="Collection(BTH3Model.F_SoNhanVienTheoGT_Result)">
+      <Parameter Name="gt" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SuaCong">
+      <Parameter Name="mact" Mode="In" Type="String" />
+      <Parameter Name="manv" Mode="In" Type="String" />
+      <Parameter Name="slngaycong" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SuaCT">
+      <Parameter Name="mact" Mode="In" Type="String" />
+      <Parameter Name="tenct" Mode="In" Type="String" />
+      <Parameter Name="diadiem" Mode="In" Type="String" />
+      <Parameter Name="ngaycapgp" Mode="In" Type="DateTime" />
+      <Parameter Name="ngaykc" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SuaNV">
+      <Parameter Name="manv" Mode="In" Type="String" />
+      <Parameter Name="hoten" Mode="In" Type="String" />
+      <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+      <Parameter Name="gioitinh" Mode="In" Type="String" />
+      <Parameter Name="diachi" Mode="In" Type="String" />
+      <Parameter Name="mapb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SuaPB">
+      <Parameter Name="mapb" Mode="In" Type="String" />
+      <Parameter Name="tenpb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ThemCong">
+      <Parameter Name="mact" Mode="In" Type="String" />
+      <Parameter Name="manv" Mode="In" Type="String" />
+      <Parameter Name="slngaycong" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ThemCongTrinh">
+      <Parameter Name="mact" Mode="In" Type="String" />
+      <Parameter Name="tenct" Mode="In" Type="String" />
+      <Parameter Name="diadiem" Mode="In" Type="String" />
+      <Parameter Name="ngaycapgp" Mode="In" Type="DateTime" />
+      <Parameter Name="ngaykc" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ThemNV">
+      <Parameter Name="manv" Mode="In" Type="String" />
+      <Parameter Name="hoten" Mode="In" Type="String" />
+      <Parameter Name="ngaysinh" Mode="In" Type="DateTime" />
+      <Parameter Name="gioitinh" Mode="In" Type="String" />
+      <Parameter Name="diachi" Mode="In" Type="String" />
+      <Parameter Name="mapb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ThemPB">
+      <Parameter Name="mapb" Mode="In" Type="String" />
+      <Parameter Name="tenpb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="XoaCong">
+      <Parameter Name="mact" Mode="In" Type="String" />
+      <Parameter Name="manv" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="XoaCT">
+      <Parameter Name="mact" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="XoaNV">
+      <Parameter Name="manv" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="XoaPB">
+      <Parameter Name="mapb" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
